@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://code.alibabatech.com/schema/dubbo
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd" default-autowire="byName">
+
+    <dubbo:registry address="127.0.0.1:9090"/>
+    <dubbo:application name="simple-consumer" logger="slf4j"/>
+    <dubbo:protocol name="dubbo" port="9092"/>
+
+    <dubbo:reference id="bookService"
+                     injvm="false"
+                     interface="io.opentracing.contrib.dubbo.filter.service.BookService" />
+    <dubbo:reference id="bookServiceWithTimeout"
+                     timeout="1"
+                     retries="3"
+                     injvm="false"
+                     interface="io.opentracing.contrib.dubbo.filter.service.BookService" />
+    <dubbo:reference id="bookServiceWithAsync"
+                     async="true"
+                     timeout="1000"
+                     retries="3"
+                     injvm="false"
+                     interface="io.opentracing.contrib.dubbo.filter.service.BookService" />
+    <dubbo:reference id="userService"
+                     check="false"
+                     injvm="false"
+                     interface="io.opentracing.contrib.dubbo.filter.service.UserService" />
+</beans>

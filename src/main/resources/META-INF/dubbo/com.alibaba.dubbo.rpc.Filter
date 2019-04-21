@@ -1,0 +1,1 @@
+opentracingFilter=io.opentracing.contrib.dubbo.filter.TracingFilter
